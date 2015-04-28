@@ -1,0 +1,6 @@
+package sogeti.omaha.recruiting;
+
+public class ModifyCandidateDetailsBean {
+	
+
+}

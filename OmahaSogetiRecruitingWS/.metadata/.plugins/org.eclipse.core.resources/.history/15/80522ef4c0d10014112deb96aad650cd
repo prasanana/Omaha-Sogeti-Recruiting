@@ -1,0 +1,9 @@
+package sogeti.omaha.recruiting;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class SendEmailBean {
+
+}

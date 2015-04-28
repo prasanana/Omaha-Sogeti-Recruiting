@@ -1,0 +1,5 @@
+package sogeti.omaha.recruiting;
+
+public class LoginBean {
+
+}
