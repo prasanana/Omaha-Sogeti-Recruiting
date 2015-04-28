@@ -1,0 +1,6 @@
+/* IE has layout issues when sorting (see #5413) */
+  #accordion-resizer {
+    padding: 10px;
+    width: 1300px;
+    height: 700px;
+  }

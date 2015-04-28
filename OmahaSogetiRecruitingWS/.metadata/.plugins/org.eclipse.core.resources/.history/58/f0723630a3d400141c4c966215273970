@@ -1,0 +1,31 @@
+package sogeti.omaha.recruiting;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestBean {
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Map<String,String> candidateDetails = new HashMap<String, String>();
+		String candidateDetailsQuery = "SELECT candidate_id, "
+									+ " first_name + '#' + last_name + '#' + "
+									+ " ISNULL(linkedin_profile,'no LinkedIn profile') + '#' + "
+									+ " ISNULL(skillset, 'no skills') + '#' + "
+									+ " ISNULL(refered_by,'No Referrer') + '#' + "
+									+ " ISNULL(CONVERT(varchar,start_date,112), 'No Start Date Assigned') + '#' + "
+									+ " ISNULL(email,'No email in record') + '#' + "
+									+ " ISNULL(phone, 'No phone number in record') + '#' + "
+									+ " ISNULL(salary_expectation,'No salary expectations in record') + '#' + "
+									+ " CONVERT(varchar,date_added,112) + '#' + "
+									+ " CONVERT(varchar,date_updated,112)"
+									+ " FROM Candidate_Table";
+		
+		candidateDetails = (HashMap<String, String>) new DBConnectHelper().getDbConnection(candidateDetailsQuery, "select", "map");
+		
+		System.out.println(candidateDetails);
+
+	}
+
+}

@@ -1,0 +1,99 @@
+package sogeti.omaha.recruiting;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class DBConnectHelper {
+	
+	public Object getDbConnection(String queryString, String queryType, String destDataType){
+		Connection connection = null;
+		Statement helperStatement = null;
+		ResultSet rsHelper = null;
+		Map<String, String> helperMap = new HashMap<String, String>();
+		List<String> helperList = new ArrayList<String>();
+		String helperString = "";
+		String helperMultipleString = "";
+		
+		int helperRowsAffected = 0;
+		try {	
+			 
+			//System.setOut(new PrintStream(new FileOutputStream("output-sysout-omaha.txt")));
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			//Production
+			//connection=DriverManager.getConnection("jdbc:sqlserver://k0xpyhrlsj.database.windows.net;databaseName=omahasogetirecruiting;user=omahasogeti@k0xpyhrlsj;password=Sogeti94");
+			//Local
+			connection=DriverManager.getConnection("jdbc:sqlserver://PSHANKAR012715\\SQLEXPRESS;databaseName=master","sa","Sogeti94");  
+			helperStatement = connection.createStatement();
+			
+			if(queryType.equalsIgnoreCase("select")){
+				rsHelper = helperStatement.executeQuery(queryString);
+				if(destDataType.equalsIgnoreCase("map")){
+				while(rsHelper.next()){
+					helperMap.put(rsHelper.getString(1), rsHelper.getString(2));
+				}
+				return helperMap; 
+		}
+				else if(destDataType.equalsIgnoreCase("list")){
+					while(rsHelper.next()){
+						helperList.add(rsHelper.getString(1));
+					}
+					return helperList; 
+			}
+			
+			else if(destDataType.equalsIgnoreCase("string")){
+					while(rsHelper.next()){
+						helperString = rsHelper.getString(1);
+					}
+					//System.out.println("helperString - "+helperString);
+					return helperString; 
+			}
+				
+			else if(destDataType.equalsIgnoreCase("multipleString")){
+				while(rsHelper.next()){
+					helperMultipleString = helperMultipleString + rsHelper.getString(1) + ",";
+				}
+				return helperMultipleString; 
+		}
+			
+			}else{
+				helperRowsAffected = helperStatement.executeUpdate(queryString);
+				return helperRowsAffected;
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		finally{
+			try {
+					if(helperStatement!=null){
+						helperStatement.close();	
+					}
+					if(connection!=null){
+						connection.close();	
+					}
+					if(rsHelper!=null){
+						rsHelper.close();	
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}		
+		}
+		
+		return null;
+		
+	}
+
+}

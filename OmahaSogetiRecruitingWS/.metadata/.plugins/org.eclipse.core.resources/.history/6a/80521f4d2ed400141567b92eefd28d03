@@ -1,0 +1,107 @@
+package sogeti.omaha.recruiting;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UpdateCandidateDetail
+ */
+public class UpdateCandidateDetailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateCandidateDetailServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		String userGuid = (String) request.getSession().getAttribute("sessionUserGuid");
+		if(userGuid == null){
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			return;
+		}
+		String methodValue = "";
+		String methodId = "";
+		String practiceValue = "";
+		String practiceId = "";
+		String candidateID = request.getParameter("candidateID");
+		String firstName = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getFirstName(candidateID);
+		String lastName = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getLastname(candidateID);
+		String linkedIn = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getLinkedIn(candidateID);
+		String referrer = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getReferrer(candidateID);
+		String skillSet = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getSkillSet(candidateID);
+		String email = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getEmail(candidateID);
+		String phoneNo = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getPhoneNo(candidateID);
+		String salary = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getSalary(candidateID);
+		String comments = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getComments(candidateID);
+		Map<String,String> method  = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getMethod(candidateID);
+		String level = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getLevel(candidateID);
+		Map<String,String> practice = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getPractice(candidateID);	
+		Map<String,String> methodList = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getMethodList();
+		List<String> levelList = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getLevelList();
+		Map<String,String> practiceList = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getPracticeList();
+		String skillSets = new sogeti.omaha.recruiting.UpdateCandidateDetailBean().getSkillSets();
+
+		Iterator itMethod = method.entrySet().iterator();
+	    while (itMethod.hasNext()) {
+	        Map.Entry pairMethod = (Map.Entry)itMethod.next();
+	        methodValue = (String) pairMethod.getValue();
+	        methodId = (String) pairMethod.getKey();
+	        itMethod.remove(); // avoids a ConcurrentModificationException
+	    }
+	    
+	    Iterator itPractice = practice.entrySet().iterator();
+	    while (itPractice.hasNext()) {
+	        Map.Entry pairPractice = (Map.Entry)itPractice.next();
+	        practiceValue = (String) pairPractice.getValue();
+	        practiceId = (String) pairPractice.getKey();
+	        itPractice.remove(); // avoids a ConcurrentModificationException
+	    }
+		
+		request.setAttribute("firstName", firstName);
+		request.setAttribute("lastName", lastName);
+		request.setAttribute("linkedIn", linkedIn);
+		request.setAttribute("referrer", referrer);
+		request.setAttribute("skillSet", skillSet);
+		request.setAttribute("email", email);
+		request.setAttribute("phoneNo", phoneNo);
+		request.setAttribute("salary", salary);
+		request.setAttribute("comments", comments);
+		request.setAttribute("methodValue", methodValue);
+		request.setAttribute("methodId", methodId);
+		request.setAttribute("level", level);
+		request.setAttribute("practiceValue", practiceValue);
+		request.setAttribute("practiceId", practiceId);
+		request.setAttribute("methodList", methodList);
+		request.setAttribute("levelList", levelList);
+		request.setAttribute("practiceList", practiceList);
+		request.setAttribute("skillSets", skillSets);
+		
+		request.getRequestDispatcher("UpdateCandidateDetail.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+}

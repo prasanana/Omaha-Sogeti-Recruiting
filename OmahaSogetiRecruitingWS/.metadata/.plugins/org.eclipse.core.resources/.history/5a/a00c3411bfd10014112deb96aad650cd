@@ -1,0 +1,15 @@
+package sogeti.omaha.recruiting;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.simple.JSONArray;
+
+import sogeti.omaha.recruiting.DBConnectHelper;
+
+
+public class AddCandidateBean {
+
+}

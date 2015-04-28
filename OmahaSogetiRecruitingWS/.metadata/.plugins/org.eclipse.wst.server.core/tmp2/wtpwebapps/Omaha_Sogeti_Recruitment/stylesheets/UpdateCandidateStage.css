@@ -1,0 +1,43 @@
+table {
+  background-color: white;
+  width: 100%;
+}
+
+.updateStageTableDiv { 
+	height:500px; 
+	overflow-y:scroll; 
+	}
+
+tbody td {
+  background-color: white;
+}
+thead th{
+  background-color: #dd1533;
+}
+
+.updateCandidateStageForm input[type=submit] {  
+    border: 1px solid rgba(0, 0, 0, 0.3);  
+    background: #dd1533; /* Old browsers */  
+    background: -moz-linear-gradient(top,  #dd1533 0%, #dd1533 100%); /* FF3.6+ */  
+    background: -webkit-gradient(linear, left top, left bottombottom, color-stop(0%,#dd1533), color-stop(100%,#dd1533)); /* Chrome,Safari4+ */  
+    background: -webkit-linear-gradient(top,  #dd1533 0%,#dd1533 100%); /* Chrome10+,Safari5.1+ */  
+    background: -o-linear-gradient(top,  #dd1533 0%,#dd1533 100%); /* Opera 11.10+ */  
+    background: -ms-linear-gradient(top,  #dd1533 0%,#dd1533 100%); /* IE10+ */  
+    background: linear-gradient(to bottombottom,  #dd1533 0%,#dd1533 100%); /* W3C */  
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd1533', endColorstr='#dd1533',GradientType=0 ); /* IE6-9 */  
+    color: #fff;  
+    padding: 5px 15px;  
+    margin-right: 0;  
+    margin-top: 15px;  
+    border-radius: 3px;  
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);  
+    width:150px;
+} 
+
+th.sortable {
+    color: white;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+

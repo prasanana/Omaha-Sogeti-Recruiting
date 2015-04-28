@@ -1,0 +1,17 @@
+function candidateByStageOnLoad(){
+
+	$(function() {
+	    $( "#candidateByStageAccordion" ).accordion({
+	      heightStyle: "fill"
+	    });
+	  });
+	  $(function() {
+	    $( "#accordion-resizer" ).resizable({
+	      minHeight: 140,
+	      minWidth: 200,
+	      resize: function() {
+	        $( "#candidateByStageAccordion" ).accordion( "refresh" );
+	      }
+	    });
+	  });
+}

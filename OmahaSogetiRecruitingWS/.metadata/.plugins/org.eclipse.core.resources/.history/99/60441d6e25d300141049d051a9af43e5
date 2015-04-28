@@ -1,0 +1,21 @@
+package sogeti.omaha.recruiting;
+
+public class LoginBean {
+	
+public String checkUser(String userName, String password){
+		
+		String checkUserQuery = "SELECT COUNT(*) FROM User_Table"
+								+ " WHERE user_name = '"+userName+"'"
+								+ " AND user_password = '"+password+"'";
+		//String count = (String)new DBConnectHelper().getDbConnection(checkUserQuery, "select", "string");
+		//System.out.println(count);
+		if((userName.equals("cassie.alexander")) && (password.equals("Sogeti94"))){
+			return "userExists";	
+		}
+		else{
+			return "noUserExists";
+		}
+				
+	}
+
+}

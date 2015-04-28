@@ -1,0 +1,21 @@
+function fnOnload(){
+	//zebraRows('tbody tr:odd td', 'odd');
+	sortRows();
+	searchRows();
+}
+function zebraRows(selector, className)
+{
+  $(selector).removeClass(className).addClass(className);
+}
+
+function searchRows(){
+	var $rows = $('.modifyCandidateDetailsData');
+	$('#modifyCandidateDetailsSearch').keyup(function() {
+	    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+	    
+	    $rows.show().filter(function() {
+	        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	        return !~text.indexOf(val);
+	    }).hide();
+	});
+}
